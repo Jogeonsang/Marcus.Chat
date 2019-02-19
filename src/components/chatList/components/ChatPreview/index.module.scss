@@ -1,0 +1,43 @@
+.wrap {
+  display: flex;
+  height: 100px;
+  border-bottom: 1px solid #dee2e6;
+  background-color: white;
+  &:hover {
+    background-color: #f8f9fa;
+  }
+  .profile {
+    width: 100px;
+    height: 100px;
+  }
+  .Link {
+    text-decoration: none;
+    display: flex;
+  }
+  .chat_privew {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 15px;
+    .chat_last_time {
+      margin-left: auto;
+      color: #868e96;
+      font-size: 12px;
+    }
+    .chat_user {
+      margin: 0;
+      color: #113764;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .chat_last_message {
+      color: #495057;
+      width: 270px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+}

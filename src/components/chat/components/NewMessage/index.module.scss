@@ -1,0 +1,28 @@
+.wrap {
+  margin: 50px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  .profile {
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+    bottom: 30px;
+    right: 20px;
+  }
+  .message {
+    box-sizing: border-box;
+    margin-left: 10px;
+    background-color: white;
+    max-width: 300px;
+    border-radius: 5px;
+    padding: 13px 20px;
+    color: #495057;
+  }
+  .time {
+    display: inline-block;
+    margin-left: 10px;
+    color: #868e96;
+    font-size: 12px;
+  }
+}
