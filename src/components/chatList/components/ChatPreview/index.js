@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/ko";
 import styles from "./index.module.scss";
 
+moment.locale("ko");
 const ChatPreview = ({ chatList }) => {
   return chatList.map((List, index) => (
     <div className={styles.wrap}>
@@ -13,7 +16,9 @@ const ChatPreview = ({ chatList }) => {
       <Link to={`Chat/${List.userInfo.id}`} key={index} className={styles.Link}>
         <div className={styles.chat_privew}>
           <span className={styles.chat_last_time}>
-            {List.messageList[List.messageList.length - 1].timestamp}
+            {moment(
+              List.messageList[List.messageList.length - 1].timestamp
+            ).format("dddd")}
           </span>
           <h className={styles.chat_user}>{List.userInfo.name}</h>
           <span className={styles.chat_last_message}>

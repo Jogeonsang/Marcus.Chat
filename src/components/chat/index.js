@@ -4,15 +4,18 @@ import chatData from "src/static/chatData";
 import styles from "./index.module.scss";
 import Message from "./components/Message";
 import NewMessage from "./components/NewMessage";
+import { of } from "rxjs";
 
 class Chat extends Component {
   constructor(props) {
     super(props);
+    this.messagesEnd = React.createRef();
     this.state = {
       isLoading: true,
       chatDiaLog: [],
       newMessageText: "",
-      newMessages: []
+      newMessages: [],
+      scrollTop: 0
     };
   }
   componentDidMount() {
@@ -27,18 +30,26 @@ class Chat extends Component {
       return List;
     });
   }
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   handleMessageChange = e => {
     this.setState({
       newMessageText: e.target.value
     });
   };
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth", block: "end" });
+  };
   createMessage = e => {
     e.preventDefault();
     this.setState({
       newMessages: [...this.state.newMessages, this.state.newMessageText],
       newMessageText: ""
     });
+    this.scrollToBottom();
   };
   render() {
     const { chatDiaLog, isLoading, newMessages } = this.state;
@@ -53,17 +64,25 @@ class Chat extends Component {
           <div className={styles.titlex}>{chatDiaLog.userInfo.name}</div>
         </div>
         <div className={styles.message_box}>
-          {chatDiaLog.messageList.map(messages => {
-            return (
-              <Message
-                message={messages}
-                profile={chatDiaLog.userInfo.profile_img}
-              />
-            );
-          })}
-          {newMessages.map(messages => {
-            return <NewMessage message={messages} profile={"Marcus.jpeg"} />;
-          })}
+          <div>
+            {chatDiaLog.messageList.map(messages => {
+              return (
+                <Message
+                  message={messages}
+                  profile={chatDiaLog.userInfo.profile_img}
+                />
+              );
+            })}
+          </div>
+          <div
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          >
+            {newMessages.map(messages => {
+              return <NewMessage message={messages} profile={"Marcus.jpeg"} />;
+            })}
+          </div>
         </div>
         <form className={styles.message_form} onSubmit={this.createMessage}>
           <input
